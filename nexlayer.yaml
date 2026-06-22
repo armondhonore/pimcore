@@ -1,0 +1,28 @@
+application:
+  name: pimcore
+  pods:
+  - name: app
+    image: pimcore/pimcore:php8.2-latest
+    path: /
+    servicePorts:
+    - 80
+    vars:
+      PIMCORE_ENVIRONMENT: production
+      DATABASE_URL: "mysql://pimcore:pimcore@mysql.pod:3306/pimcore"
+    volumes:
+    - name: pimcore-data
+      mountPath: /var/www/html/var
+      size: 10Gi
+  - name: mysql
+    image: mysql:8.0
+    servicePorts:
+    - 3306
+    vars:
+      MYSQL_DATABASE: pimcore
+      MYSQL_USER: pimcore
+      MYSQL_PASSWORD: pimcore
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+    - name: pimcore-db
+      mountPath: /var/lib/mysql
+      size: 10Gi
