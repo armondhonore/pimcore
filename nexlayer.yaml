@@ -23,8 +23,6 @@ application:
     vars:
       MYSQL_DATABASE: pimcore
       MYSQL_USER: pimcore
-      MYSQL_PASSWORD: pimcorepass
-      MYSQL_ROOT_PASSWORD: pimcorerootpass
     volumes:
     - name: pimcore-mysql-v3
       mountPath: /var/lib/mysql
