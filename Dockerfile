@@ -23,6 +23,7 @@ RUN COMPOSER_MEMORY_LIMIT=-1 composer create-project "pimcore/skeleton:^11.0" /o
     && rm -rf /var/www/html \
     && mv /opt/pimcore /var/www/html \
     && mkdir -p /var/www/html/var /var/www/html/public/var \
+    && printf '<?php http_response_code(200); echo "OK";' > /var/www/html/public/health.php \
     && chown -R www-data:www-data /var/www/html
 
 # Force symfony/property-info >=7.2 to fix the Constant-expression compile error

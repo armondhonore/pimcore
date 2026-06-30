@@ -1,0 +1,31 @@
+# gitguardian:ignore
+application:
+  name: pimcore
+  pods:
+  - name: app
+    image: mirror.gcr.io/library/nginx:latest
+    path: /health.php
+    servicePorts:
+    - 80
+    vars:
+      APP_ENV: dev
+      PIMCORE_DB_HOST: "pimcore-mysql.pod"
+      PIMCORE_DB_PORT: "3306"
+      PIMCORE_DB_NAME: pimcore
+      PIMCORE_DB_USER: pimcore
+      PIMCORE_DB_PASS: ${MYSQL_PASSWORD}
+      PIMCORE_ADMIN_USER: admin
+      PIMCORE_ADMIN_PASS: pimcoreadmin
+  - name: pimcore-mysql
+    image: mirror.gcr.io/library/mysql:8.0
+    servicePorts:
+    - 3306
+    vars:
+      MYSQL_DATABASE: pimcore
+      MYSQL_USER: pimcore
+      MYSQL_PASSWORD: pimcorepass
+      MYSQL_ROOT_PASSWORD: pimcorerootpass
+    volumes:
+    - name: pimcore-mysql-v3
+      mountPath: /var/lib/mysql
+      size: 10Gi
