@@ -4,7 +4,7 @@ application:
   pods:
   - name: app
     image: mirror.gcr.io/library/nginx:latest
-    path: /health.php
+    path: /
     servicePorts:
     - 80
     vars:
